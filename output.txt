@@ -1,0 +1,10 @@
+Store Management System
+Customer ID: 1
+Customer Name: Craig
+Product ID: 7
+Product name: iPhone 11
+Purchase ID: 11
+Cost: 1000.0
+Tax: +90.0
+Total cost: 1090.0
+End of Receipt
