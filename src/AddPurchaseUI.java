@@ -186,7 +186,7 @@ public class AddPurchaseUI {
                 return;
             }
 
-            labCustomerName.setText("Customer Name: " + customer.mName2);
+            labCustomerName.setText("Customer Name: " + customer.mName);
 
         }
 
@@ -269,13 +269,11 @@ public class AddPurchaseUI {
             }
 
 
-            switch (StoreManager.getInstance().getDataAdapter().savePurchase(purchase)) {
-                case SQLiteDataAdapter.PURCHASE_DUPLICATE_ERROR:
-                    JOptionPane.showMessageDialog(null, "Purchase NOT added successfully! Duplicate product ID!");
-                default:
-                    JOptionPane.showMessageDialog(null, "Purchase added successfully!" + purchase);
-            }
-
+            int res = StoreManager.getInstance().getDataAdapter().savePurchase(purchase);
+            if (res == SQLiteDataAdapter.PURCHASE_DUPLICATE_ERROR)
+                JOptionPane.showMessageDialog(null, "Purchase NOT added successfully! Duplicate product ID!");
+            else
+                JOptionPane.showMessageDialog(null, "Purchase added successfully!" + purchase);
             IReceiptBuilder rb = new TXTReceiptBuilder();
 
             rb.appendHeader("Store Management System");

@@ -2,20 +2,15 @@ import javax.swing.*;
 
 public class StoreManager {
 
-    public static final String db = "SQLite";
-    public static final String path = "C:/Users/dturn/Desktop/COMP3700_Programs/StoreManager/store.db";
+    public static  String db = "Network";
+    public static  String path = "localhost:1000";
     IDataAdapter adapter = null;
 
     private static StoreManager instance = null;
 
     public static StoreManager getInstance() {
-        if (instance == null) {
-        String dbfile = path;
-        JFileChooser fc = new JFileChooser();
-        if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
-            dbfile = fc.getSelectedFile().getAbsolutePath();
-
-        instance = new StoreManager(db, dbfile);
+       if (instance == null) {
+        instance = new StoreManager(db, path);
     }
         return instance;
 }
@@ -39,11 +34,15 @@ public class StoreManager {
         else
         if (db.equals("SQLite"))
             adapter = new SQLiteDataAdapter();
+        else
+        if (db.equals("Network"))
+            adapter= new NetworkDataAdapter();
 
         adapter.connect(path);
-        ProductModel product = adapter.loadProduct(1);
+       // adapter.connect(path);
+        //ProductModel product = adapter.loadProduct(1);
 
-        System.out.println("Loaded product: " + product);
+        //System.out.println("Loaded product: " + product);
 
     }
 
@@ -57,13 +56,26 @@ public class StoreManager {
     }
 
     public void run() {
-        MainUI ui = new MainUI();
+        LoginUI ui = new LoginUI();
         ui.view.setVisible(true);
     }
 
     public static void main(String[] args) {
         System.out.println("Hello class!");
-//        StoreManager.getInstance().init();
+        if (args.length > 0) { // having runtime arguments
+            db = args[0];
+            if (args.length == 1) { // do not have 2nd arguments for dbfile
+                if (db.equals("SQLite")) {
+                    JFileChooser fc = new JFileChooser();
+                    if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+                        path = fc.getSelectedFile().getAbsolutePath();
+                }
+                else
+                    path = JOptionPane.showInputDialog("Enter address of database server as host:port");
+            }
+            else
+                path = args[1];
+        }
         StoreManager.getInstance().run();
     }
 

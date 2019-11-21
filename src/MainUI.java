@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,9 +6,11 @@ import java.awt.event.ActionListener;
 public class MainUI {
     public JFrame view;
 
-    public JButton btnAddProduct = new JButton("Add New Product");
-    public JButton btnAddCustomer = new JButton("Add New Customer");
+    public JButton btnManageProduct = new JButton("Manage Product database");
+    public JButton btnManageCustomer = new JButton("Manage Customer database");
     public JButton btnAddPurchase = new JButton("Add New Purchase");
+   // public JButton btnUpdateProduct = new JButton("Update Product Information");
+
 
     public MainUI() {
         this.view = new JFrame();
@@ -25,26 +26,25 @@ public class MainUI {
         view.getContentPane().add(title);
 
         JPanel panelButtons = new JPanel(new FlowLayout());
-        panelButtons.add(btnAddProduct);
-        panelButtons.add(btnAddCustomer);
+        panelButtons.add(btnManageProduct);
+        panelButtons.add(btnManageCustomer);
         panelButtons.add(btnAddPurchase);
+
         view.getContentPane().add(panelButtons);
 
-        btnAddProduct.addActionListener(new ActionListener() {
+        btnManageProduct.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                AddProductUI ap = new AddProductUI();
+                ManageProductUI ap = new ManageProductUI();
                 ap.run();
-
-
             }
         });
 
-        btnAddCustomer.addActionListener(new ActionListener() {
+        btnManageCustomer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddCustomerUI ac = new AddCustomerUI();
+                ManageCustomerUI ac = new ManageCustomerUI();
                 ac.run();
             }
         });
@@ -54,10 +54,12 @@ public class MainUI {
 
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                AddPurchaseUI ap = new AddPurchaseUI();
-                ap.run();
+                AddPurchaseUI apur = new AddPurchaseUI();
+                apur.run();
             }
         });
+
+
 
     }
 }

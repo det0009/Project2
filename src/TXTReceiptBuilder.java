@@ -10,7 +10,7 @@ public class TXTReceiptBuilder implements IReceiptBuilder {
     @Override
     public void appendCustomer(CustomerModel customer) {
         sb.append("Customer ID: ").append(customer.mCustomerID).append("\n");
-        sb.append("Customer Name: ").append(customer.mName2).append("\n");
+        sb.append("Customer Name: ").append(customer.mName).append("\n");
     }
 
     @Override
